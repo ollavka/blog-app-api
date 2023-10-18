@@ -85,6 +85,8 @@ const sendAuthentification = async (res: Response, user: User) => {
   res.cookie('refreshToken', refreshToken, {
     maxAge: 30 * 24 * 60 * 60 * 1000,
     httpOnly: true,
+    secure: true,
+    sameSite: 'none',
   });
 
   res.send({

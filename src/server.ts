@@ -10,11 +10,15 @@ import fileUpload from 'express-fileupload';
 import 'dotenv/config';
 
 const PORT = process.env.PORT || 5000;
-const origin = process.env.CLIENT_URL;
+const origin = process.env.CLIENT_URL as string;
 
 const app = express();
 
-app.use(cors({ origin, credentials: true }));
+app.use(cors({
+  origin,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
