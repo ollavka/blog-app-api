@@ -8,7 +8,8 @@
     "dev": "nodemon src/server.ts",
     "db-push": "prisma db push",
     "migrate": "prisma migrate dev",
-    "format": "prisma format"
+    "format": "prisma format",
+    "preinstall": "echo Skip preinstall"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
