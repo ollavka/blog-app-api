@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String        @id @default(uuid())
+  email           String        @unique
+  username        String        @unique
+  password        String
+  activationToken String?       @unique
+  firstName       String?
+  lastName        String?
+  avatar          String?
+  biography       String?
+  refreshToken    RefreshToken?
+  posts           Post[]
+  comments        Comment[]
+
+  @@map(name: "users")
+}
+
+model RefreshToken {
+  id     String @id @default(uuid())
+  token  String @unique
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map(name: "refresh_tokens")
+}
+
+model Post {
+  id          String    @id @default(uuid())
+  description String
+  photo       String?
+  userId      String
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  comments    Comment[]
+
+  @@map(name: "posts")
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  message   String
+  createdAt DateTime @default(now())
+  userId    String
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map(name: "comments")
+}
