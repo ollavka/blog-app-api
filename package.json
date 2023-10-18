@@ -14,6 +14,9 @@
   "prisma": {
     "schema": "src/prisma/schema.prisma"
   },
+  "engines": {
+    "node": ">=18.18.0 <19.0.0"
+  },
   "keywords": [],
   "author": "Oleksii Lavka",
   "license": "ISC",
